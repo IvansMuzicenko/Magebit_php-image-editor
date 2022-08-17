@@ -7,6 +7,8 @@ if (!file_exists(IMG_FILE_NAME)) {
     exit;
 }
 
+list($width, $height, $type, $attr) = getimagesize(IMG_FILE_NAME);
+$image = imagecreatefromjpeg(IMG_FILE_NAME);
 
 if (
     isset($_GET["width"]) &&
@@ -14,13 +16,10 @@ if (
     isset($_GET["height"]) &&
     is_string($_GET["height"])
 ) {
-    list($width, $height, $type, $attr) = getimagesize(IMG_FILE_NAME);
-
     $new_width = (int) $_GET['width'];
     $new_height = (int) $_GET['height'];
     $w_ratio = $new_width / $width;
     $h_ratio = $new_height / $height;
-    $image = imagecreatefromjpeg(IMG_FILE_NAME);
 
     if ($w_ratio > $h_ratio) {
         $scale_height = $height * $w_ratio;
@@ -37,26 +36,16 @@ if (
     } else if ($w_ratio == $h_ratio) {
         $image = imagescale($image, $new_width, $new_height);
     }
-
-    imagejpeg($image);
-    imagedestroy($image);
 } else if (isset($_GET["width"]) && is_string($_GET["width"])) {
-    list($width, $height, $type, $attr) = getimagesize(IMG_FILE_NAME);
-
     $new_width = (int) $_GET['width'];
 
-    $image = imagecreatefromjpeg(IMG_FILE_NAME);
     $image = imagescale($image, $new_width);
-    imagejpeg($image);
-    imagedestroy($image);
 } else if (isset($_GET["height"]) && is_string($_GET["height"])) {
-    list($width, $height, $type, $attr) = getimagesize(IMG_FILE_NAME);
-
     $new_height = (int) $_GET['height'];
     $new_width = $width * ($new_height / $height);
 
-    $image = imagecreatefromjpeg(IMG_FILE_NAME);
     $image = imagescale($image, $new_width, $new_height);
-    imagejpeg($image);
-    imagedestroy($image);
 }
+
+imagejpeg($image);
+imagedestroy($image);

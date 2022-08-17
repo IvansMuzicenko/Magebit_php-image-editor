@@ -6,10 +6,10 @@ document.querySelector("form").onsubmit = function (evt) {
 
   const data = new FormData();
   if (width > 0) {
-    this.action += "width=" + width + "&";
+    this.action += "width=" + width;
   }
   if (height > 0) {
-    this.action += "height=" + height;
+    this.action += "&height=" + height;
   }
-  fetch(this.action + "");
+  fetch(this.action);
 };

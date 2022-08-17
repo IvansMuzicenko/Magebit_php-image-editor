@@ -11,20 +11,26 @@
     <p>Scale am image by using width OR height input</p>
     <p>or crop an image by using both inputs</p>
     <form action="api.php" method="POST">
+      <label for="width">Width:</label>
       <input
+        id="width"
         class="width-input"
         type="number"
         value="0"
         name="width"
         placeholder="Enter a width"
       />
+      <br />
+      <label for="height">Height:</label>
       <input
+        id="height"
         class="height-input"
         type="number"
         value="0"
         name="height"
         placeholder="Enter a height"
       />
+      <br />
       <button type="submit">Submit</button>
     </form>
   </body>
